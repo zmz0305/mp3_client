@@ -1,0 +1,31 @@
+<div class="list" ng-controller="taskListController">
+    <input type="radio" ng-model="completed" value="true"> completed
+    <input type="radio" ng-model="completed" value="false"> pending
+    <input type="radio" ng-model="completed" value=""> ALL
+    <select ng-model="orderValue" ng-change="refresh()">
+        <option value="deadline">deadline earliest to latest</option>
+        <option value="name">name</option>
+        <option value="dateCreated">create date</option>
+    </select>
+    <input type="button" ng-click="setReverse(false)"> ascending
+    <input type="button" ng-click="setReverse(true)"> descending
+    <a class="button" ng-click="prev()"><--prev</a>
+    <a class="button" ng-click="next()">next--></a>
+    <a href="#/addtask" class="button">add task</a>
+    <div ng-repeat="task in pagedItems[currentPage]| limitTo: limit | filter: completed">
+
+        <div class="row">
+            <div class="columns small-3">
+                <a href="#/taskdetail/{{task._id}}">{{task.name}}</a>
+            </div>
+            <div class="columns small-6">
+                deadline {{task.deadline}} <br>
+                assgined to {{task.assignedUserName}} <br>
+                completed {{task.completed}}
+            </div>
+            <div>
+                <a href="" ng-click="deleteTask(task._id)" class="button">delete</a>
+            </div><br>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,33 @@
+<div class="row" ng-controller="editTaskController">
+    <div>
+        <h1>edit task</h1>
+        <form name="form" novalidate>
+            Name:<span style="color:#FF0000;">*</span>
+            <input type="text" ng-model="task.name" name="tName" required="" />
+            <br />
+            <div ng-show="form.$submitted || form.tName.$touched">
+                <div ng-show="form.tName.$error.required">you must tell us the task name.</div>
+            </div>
+            description:
+            <input type="text" ng-model="task.description" name="tDescription">
+            deadline:<span style="color:#FF0000;">*</span>
+            <datepicker>
+                <input type="text" id="datepicker" ng-model="task.deadline" name="tDeadline" required="" />
+            </datepicker>
+
+            <br />
+            <div ng-show="form.$submitted || form.tDeadline.$touched">
+                <span ng-show="form.tDeadline.$error.required">You must tell us the deadline.</span>
+                <span ng-show="form.tDeadline.$error.datetime">This is not a valid email.</span>
+            </div>
+            assgined user:
+            <select ng-options="user.name for user in users" ng-model="nameAssigned">
+                <!--<option ng-repeat="user in users" ng-model="task.assginedUserName" value="{{user.name}}">{{user.name}}</option>-->
+            </select>
+            <input type="radio" name="opt" ng-model="task.completed" value="true"><label for="true">completed</label></input>
+            <input type="radio" name="opt" ng-model="task.completed" value="false" checked><label for="false">incompleted</label></input>
+            <input type="submit" ng-click="update(task)" value="Save" />
+            <div>{{msg}}</div>
+        </form>
+    </div>
+</div>

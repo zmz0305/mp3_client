@@ -1,0 +1,7 @@
+<div class="row" ng-controller="taskDetailController">
+    <h1>task detail</h1>
+    <div class="columns small-6">name: {{task.name}}<br>deadline: {{task.deadline}}<br>completed: {{task.completed}}  </div>
+    <div class="columns small-6">
+        <a href="#/edittask/{{task._id}}" class="button">edit task</a>
+    </div>
+</div>

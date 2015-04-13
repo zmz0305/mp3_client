@@ -1,0 +1,21 @@
+<div class="row" ng-controller="userDetailController">
+    <h1>User Profile</h1>
+    <div class="row">
+        <div class="columns small-3">
+            <h5>{{user.name}}</h5>
+        </div>
+        <div class="columns small-9">
+            <h5>{{user.email}}</h5>
+        </div>
+        <h1 class="columns small-12">pending tasks</h1>
+        <div ng-repeat="task in userTasks" ng-if="task.completed==false">
+            <a href="#/taskdetail/{{task._id}}">{{task.name}}</a>
+            <p>deadline: {{task.deadline}}--------------------completed: {{task.completed}}</p>
+        </div>
+        <a class="button" ng-click="showCompleted()" href="">show completed task</a>
+        <div ng-repeat="task in userTasks" ng-if="task.completed==true"  ng-class="{disabled: showComplete == false}">
+            <a href="#/taskdetail/{{task._id}}">{{task.name}}</a>
+            <p>deadline: {{task.deadline}}--------------------completed: {{task.completed}}</p>
+        </div>
+    </div>
+</div>

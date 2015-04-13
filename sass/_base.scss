@@ -12,3 +12,9 @@ h1 {
   color: $blue;
 }
 
+.active{
+  visibility: visible;
+}
+.disabled{
+  visibility: hidden;
+}

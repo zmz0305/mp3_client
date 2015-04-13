@@ -1,0 +1,23 @@
+<div class="list" ng-controller="userListController">
+    <div class="row">
+        <h1 class="column small-8">Users</h1>
+        <a href="#/adduser" class="button column small-4">add user</a>
+    </div>
+    <ul>
+        <li ng-repeat="user in users">
+            <div class="row">
+                <div class="columns small-3">
+                    <a href="#/userdetail/{{user._id}}" ng-click="get">{{user.name}}<a>
+                </div>
+                <div class="columns small-3">
+                    {{user.email}}
+                </div>
+                <div class="columns small-3">
+                    <a class="botton" href="" ng-click="deleteUser(user._id)">delete</a>
+                </div>
+
+            </div>
+        </li>
+    </ul>
+
+</div>
