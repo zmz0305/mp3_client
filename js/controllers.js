@@ -167,6 +167,9 @@ demoControllers.controller('taskDetailController', ['$scope', '$http', '$filter'
 
 demoControllers.controller('addTaskController', ['$scope', '$http', '$filter', '$routeParams', '$window', 'Users', 'Tasks', function($scope, $http, $filter, $routeparams, $window, Users, Tasks){
     $scope.master = {};
+    Users.get().success(function(data){
+        $scope.users = data.data;
+    });
     $scope.update = function(task){
         if(!task || !task.name || !task.deadline){
             $scope.msg = "fill in the required form first";
@@ -179,6 +182,26 @@ demoControllers.controller('addTaskController', ['$scope', '$http', '$filter', '
             }).error(function (err) {
                 $scope.msg = err.message;
             });
+            //$scope.master = angular.copy(task);
+            //$scope.user = {};
+            //if ($scope.nameAssigned) {
+            //    $scope.master["assignedUserName"] = angular.copy($scope.nameAssigned.name);
+            //}
+            //$http.get($window.sessionStorage.baseurl + '/api/users?where={"name":"' + $scope.master.assignedUserName + '"}').success(function (data) {
+            //    $scope.user = data.data[0];
+            //    console.log($scope.user);
+            //    $scope.master["assignedUser"] = $scope.user._id;
+            //    Users.putUser($scope.master["assignedUser"], {pendingTasks: id}).success(function (data) {
+            //        console.log("putUser: " + data.message);
+            //    })
+            //    Tasks.putTask(id, $scope.master).success(function (data) {
+            //        $scope.msg = data.message;
+            //    }).error(function (err) {
+            //        $scope.msg = err.message;
+            //    });
+            //}).error(function (err) {
+            //    $scope.msg = err.message;
+            //});
         }
     };
 }]);
@@ -206,9 +229,13 @@ demoControllers.controller('editTaskController', ['$scope', '$http', '$filter', 
                 $scope.user = data.data[0];
                 console.log($scope.user);
                 $scope.master["assignedUser"] = $scope.user._id;
-                Users.putUser($scope.master["assignedUser"], {pendingTasks: id}).success(function (data) {
+                $scope.user.pendingTasks.push(id);
+                console.log($scope.user);
+                Users.putUser($scope.master["assignedUser"], $scope.user).success(function (data) {
                     console.log("putUser: " + data.message);
-                })
+                }).error(function(err){
+                    console.log("pushUser: " + data.message +err.toString());
+                });
                 Tasks.putTask(id, $scope.master).success(function (data) {
                     $scope.msg = data.message;
                 }).error(function (err) {

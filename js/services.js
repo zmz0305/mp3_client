@@ -36,12 +36,14 @@ angular.module('demoServices', [])
             addUser : function(data) {
                 var baseUrl = $window.sessionStorage.baseurl;
                 console.log(data)
-                return $http({
-                    url: baseUrl+'/api/users',
-                    method: "POST",
-                    data: data
-                    //headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-                });
+                //return $http({
+                //    url: baseUrl+'/api/users',
+                //    method: "POST",
+                //    data: data,
+                //    headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+                //});
+                return $http.post(baseUrl + '/api/users', data);
+
             },
             putUser: function(id, data) {
                 var baseUrl = $window.sessionStorage.baseurl;
